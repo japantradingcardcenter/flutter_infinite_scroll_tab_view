@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import '../infinite_scroll_tab_view.dart';
 import 'cycled_list_view.dart';
@@ -30,6 +29,7 @@ class InnerInfiniteScrollTabView extends StatefulWidget {
     required this.tabPadding,
     required this.forceFixedTabWidth,
     required this.fixedTabWidthFraction,
+    this.tabBottomSpace,
   }) : super(key: key);
 
   final Size size;
@@ -50,6 +50,7 @@ class InnerInfiniteScrollTabView extends StatefulWidget {
   final double tabPadding;
   final bool forceFixedTabWidth;
   final double fixedTabWidthFraction;
+  final Widget? tabBottomSpace;
 
   @override
   InnerInfiniteScrollTabViewState createState() =>
@@ -317,6 +318,7 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
             ),
           ],
         ),
+        widget.tabBottomSpace ?? const SizedBox.shrink(),
         Expanded(
           child: CycledListView.builder(
             scrollDirection: Axis.horizontal,

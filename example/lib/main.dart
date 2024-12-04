@@ -65,6 +65,14 @@ class __ContentState extends State<_Content> {
       separator: const BorderSide(color: Colors.black12, width: 2.0),
       onPageChanged: (index) => debugPrint('page changed to $index.'),
       indicatorColor: Colors.pink,
+      tabBottomSpace: Container(
+        height: 44,
+        width: double.infinity,
+        color: Colors.red,
+        child: const Center(
+          child: Text('tab bottom space'),
+        ),
+      ),
       pageBuilder: (context, index, _) {
         return SizedBox.expand(
           child: DecoratedBox(
@@ -74,7 +82,7 @@ class __ContentState extends State<_Content> {
             child: Center(
               child: Text(
                 _convertContent(contents[index]),
-                style: Theme.of(context).textTheme.headline3!.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: contents[index] / 10 > 0.6
                           ? Colors.white
                           : Colors.black87,

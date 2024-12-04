@@ -35,6 +35,7 @@ class InfiniteScrollTabView extends StatelessWidget {
     this.size,
     this.forceFixedTabWidth = false,
     this.fixedTabWidthFraction = 0.5,
+    this.tabBottomSpace,
   }) : super(key: key);
 
   /// A length of tabs and pages.
@@ -131,6 +132,11 @@ class InfiniteScrollTabView extends StatelessWidget {
   /// This will be ignored when [forceFixedTabWidth] is false.
   final double fixedTabWidthFraction;
 
+  /// The widget to display at the bottom of the tab.
+  ///
+  /// If this is null, the tab bottom space will be hidden.
+  final Widget? tabBottomSpace;
+
   @override
   Widget build(BuildContext context) {
     if (indicatorHeight != null) {
@@ -156,6 +162,7 @@ class InfiniteScrollTabView extends StatelessWidget {
       tabPadding: tabPadding,
       forceFixedTabWidth: forceFixedTabWidth,
       fixedTabWidthFraction: fixedTabWidthFraction,
+      tabBottomSpace: tabBottomSpace,
     );
   }
 }
