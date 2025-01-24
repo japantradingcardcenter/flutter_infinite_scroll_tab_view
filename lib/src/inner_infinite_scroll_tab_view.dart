@@ -95,12 +95,7 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
   double get indicatorHeight =>
       widget.indicatorHeight ?? widget.separator?.width ?? 2.0;
 
-  late final _indicatorAnimationController =
-      AnimationController(vsync: this, duration: _tabAnimationDuration)
-        ..addListener(() {
-          if (_indicatorAnimation == null) return;
-          _indicatorSize.value = _indicatorAnimation!.value;
-        });
+  AnimationController? _indicatorAnimationController;
   Animation<double>? _indicatorAnimation;
 
   double _totalTabSizeCache = 0.0;
@@ -180,6 +175,14 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
+    _indicatorAnimationController ??= AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    )..addListener(() {
+        if (_indicatorAnimation == null) return;
+        _indicatorSize.value = _indicatorAnimation!.value;
+      });
     final textScaleFactor = MediaQuery.textScaleFactorOf(context);
     if (_previousTextScaleFactor != textScaleFactor) {
       _previousTextScaleFactor = textScaleFactor;
@@ -187,7 +190,6 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
         calculateTabBehaviorElements(textScaleFactor);
       });
     }
-    super.didChangeDependencies();
   }
 
   @override
@@ -261,8 +263,8 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
 
     _indicatorAnimation =
         Tween(begin: _indicatorSize.value, end: _tabTextSizes[modIndex])
-            .animate(_indicatorAnimationController);
-    _indicatorAnimationController.forward(from: 0);
+            .animate(_indicatorAnimationController!);
+    _indicatorAnimationController!.forward(from: 0);
 
     // 現在のスクロール位置とページインデックスを取得
     final currentOffset = _pageController.offset;
@@ -383,7 +385,7 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
   void dispose() {
     _tabController.dispose();
     _pageController.dispose();
-    _indicatorAnimationController.dispose();
+    _indicatorAnimationController?.dispose();
     super.dispose();
   }
 }
