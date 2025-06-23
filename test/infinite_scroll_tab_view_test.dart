@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:infinite_scroll_tab_view/infinite_scroll_tab_view.dart';
 import 'package:infinite_scroll_tab_view/src/inner_infinite_scroll_tab_view.dart';
@@ -127,7 +126,7 @@ void main() {
         final InnerInfiniteScrollTabViewState state =
             tester.state(find.byType(InnerInfiniteScrollTabView));
 
-        state.calculateTabBehaviorElements(1.5);
+        state.calculateTabBehaviorElements(const TextScaler.linear(1.5));
 
         final expectedSizes = [32.0, 56.0, 80.0, 104.0];
 

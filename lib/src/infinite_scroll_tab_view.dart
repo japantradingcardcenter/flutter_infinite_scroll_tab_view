@@ -150,7 +150,7 @@ class InfiniteScrollTabView extends StatelessWidget {
       pageBuilder: pageBuilder,
       onTabTap: onTabTap,
       separator: separator,
-      textScaleFactor: MediaQuery.of(context).textScaleFactor,
+      textScaler: MediaQuery.textScalerOf(context),
       defaultTextStyle: DefaultTextStyle.of(context).style,
       textDirection: Directionality.of(context),
       backgroundColor: backgroundColor,

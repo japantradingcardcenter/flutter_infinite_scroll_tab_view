@@ -4,8 +4,8 @@ version: 1.0.3
 repository: https://github.com/cb-cloud/flutter_infinite_scroll_tab_view
 
 environment:
-  sdk: ">=3.3.2 <4.0.0"
-  flutter: "3.22.3"
+  sdk: ">=3.7.2 <4.0.0"
+  flutter: "3.29.2"
 
 dependencies:
   flutter:
