@@ -231,7 +231,7 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
       if (modIndex != _selectedIndex.value) {
         widget.onPageChanged?.call(modIndex);
         _selectedIndex.value = modIndex;
-        HapticFeedback.selectionClick();
+        HapticFeedback.lightImpact();
       }
     });
   }
@@ -242,7 +242,7 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView>
     widget.onTabTap?.call(modIndex);
     widget.onPageChanged?.call(modIndex);
 
-    HapticFeedback.selectionClick();
+    HapticFeedback.lightImpact();
     _isTabPositionAligned.value = true;
 
     final sizeOnIndex = widget.forceFixedTabWidth
