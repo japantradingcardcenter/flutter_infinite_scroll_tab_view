@@ -36,6 +36,7 @@ class InfiniteScrollTabView extends StatelessWidget {
     this.forceFixedTabWidth = false,
     this.fixedTabWidthFraction = 0.5,
     this.tabBottomSpace,
+    this.initialIndex = 0,
   }) : super(key: key);
 
   /// A length of tabs and pages.
@@ -137,6 +138,9 @@ class InfiniteScrollTabView extends StatelessWidget {
   /// If this is null, the tab bottom space will be hidden.
   final Widget? tabBottomSpace;
 
+  /// 初期表示するタブのインデックス（0 が先頭）。マイページから特定カテゴリへ遷移する際に使用。
+  final int initialIndex;
+
   @override
   Widget build(BuildContext context) {
     if (indicatorHeight != null) {
@@ -144,7 +148,7 @@ class InfiniteScrollTabView extends StatelessWidget {
     }
 
     return InnerInfiniteScrollTabView(
-      size: MediaQuery.of(context).size,
+      size: size ?? MediaQuery.of(context).size,
       contentLength: contentLength,
       tabBuilder: tabBuilder,
       pageBuilder: pageBuilder,
@@ -163,6 +167,7 @@ class InfiniteScrollTabView extends StatelessWidget {
       forceFixedTabWidth: forceFixedTabWidth,
       fixedTabWidthFraction: fixedTabWidthFraction,
       tabBottomSpace: tabBottomSpace,
+      initialIndex: initialIndex,
     );
   }
 }
