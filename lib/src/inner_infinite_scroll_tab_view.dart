@@ -199,13 +199,15 @@ class InnerInfiniteScrollTabViewState extends State<InnerInfiniteScrollTabView> 
       if (_isContentChangingByTab.value) return;
 
       final currentIndexDouble = _pageController.offset / widget.size.width;
+      final currentIndex = currentIndexDouble.floor();
       final modIndex = currentIndexDouble.round() % widget.contentLength;
 
       final currentIndexDecimal = currentIndexDouble - currentIndexDouble.floor();
 
-      if (modIndex < _tabOffsets.length) {
-        _tabController.jumpTo(_tabOffsets[modIndex].transform(currentIndexDecimal));
-        _indicatorSize.value = _tabSizeTweens[modIndex].transform(currentIndexDecimal);
+      final floorIndex = currentIndex % widget.contentLength;
+      if (floorIndex >= 0 && floorIndex < _tabOffsets.length) {
+        _tabController.jumpTo(_tabOffsets[floorIndex].transform(currentIndexDecimal));
+        _indicatorSize.value = _tabSizeTweens[floorIndex].transform(currentIndexDecimal);
       }
 
       if (!_isTabPositionAligned.value) {
